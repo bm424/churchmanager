@@ -1,0 +1,53 @@
+@media(max-width:767px) {
+  .church-photo {
+    max-height: 180px;
+  }
+}
+
+@media(min-width:768px) {
+  .church-photo {
+    max-height: 240px;
+  }
+}
+
+@media(min-width:992px) {
+  .container {
+    width : 950px;
+  }
+}
+
+@media(min-width:1200px) {
+  .container {
+    width : 950px;
+  }
+}
+
+body {
+  padding-top : 50px;
+}
+
+.church-photo {
+  overflow: hidden;
+}
+
+img.detail {
+  width: 100%;
+}
+
+h2 {
+  background-color: #124559;
+  color: white;
+  padding: 15px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+td span.glyphicon {
+  font-size: 18px;
+}
+
+.church-info td {
+  font-size: 15px;
+  padding: 0.25em;
+  vertical-align: top;;
+}

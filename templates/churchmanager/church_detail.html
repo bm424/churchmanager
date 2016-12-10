@@ -1,0 +1,61 @@
+{% extends 'churchmanager/base.html' %}
+
+{% block content %}
+
+  {% if church.photo %}
+    <div class="church-photo">
+      <img src="{{ church.photo.url }}" class="img-responsive detail" />
+    </div>
+  {% endif %}
+
+  <div class="container">
+    <h2>{{ church.name }}</h2>
+    <hr />
+    <p class="lead">
+      {{ church.short_description }}
+    </p>
+    <div class="container church-info">
+      <table>
+      <tr class="church-location">
+        <td>
+          <span class="glyphicon glyphicon-map-marker"></span>
+          <span class="sr-only">Location: </span>
+        </td>
+        <td>
+          {{ church.address_line_1 }}<br />
+          {{ church.address_line_2 }}<br />
+          {{ church.postcode }}<br />
+        </td>
+      </tr>
+      {% if church.phone_number %}
+        <tr class="church-phone">
+          <td>
+            <span class="glyphicon glyphicon-earphone"></span>
+            <span class="sr-only">Phone: </span>
+          </td>
+          <td>
+            {{ church.phone_number }}
+          </td>
+        </tr>
+      {% endif %}
+      {% if church.website %}
+        <tr class="church-website">
+          <td>
+            <span class="glyphicon glyphicon-globe"></span>
+            <span>
+          </td>
+          <td>
+            <a href=href="{{ church.website }}">Website</a>
+          </td>
+          </span>
+        </tr>
+      {% endif %}
+      </table>
+    </div>
+    <p>
+      {{ church.long_description | safe | linebreaks }}
+    </p>
+  </div>
+
+
+{% endblock %}
