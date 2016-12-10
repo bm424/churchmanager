@@ -38,6 +38,17 @@
           </td>
         </tr>
       {% endif %}
+      {% if church.email %}
+        <tr class="church-email">
+          <td>
+            <span class="glyphicon glyphicon-envelope"></span>
+            <span class="sr-only">Email: </span>
+          </td>
+          <td>
+            {{ church.email_address }}
+          </td>
+        </tr>
+      {% endif %}
       {% if church.website %}
         <tr class="church-website">
           <td>
