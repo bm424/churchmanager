@@ -6,4 +6,3 @@ from .models import Church
 admin.site.site_header = "Churches of Bridlington Administration"
 
 admin.site.register(Church)
-admin.site.unregister(Site)
