@@ -1,10 +1,12 @@
 {% extends 'churchmanager/base.html' %}
 
+{% load cropping %}
+
 {% block content %}
 
   {% if church.photo %}
     <div class="church-photo">
-      <img src="{{ church.photo.url }}" class="img-responsive detail" />
+      <img src="{% cropped_thumbnail church "wide_crop" %}" class="img-responsive detail" />
     </div>
   {% endif %}
 
@@ -56,7 +58,7 @@
             <span>
           </td>
           <td>
-            <a href=href="{{ church.website }}">Website</a>
+            <a href="{{ church.website }}">Website</a>
           </td>
           </span>
         </tr>
@@ -66,6 +68,12 @@
     <p>
       {{ church.long_description | safe | linebreaks }}
     </p>
+    {% if church.maps_query %}
+    <iframe width="600" height="450" frameborder="0" style="border:0"
+      src="https://www.google.com/maps/embed/v1/place?q={{ church.maps_query }}&key=AIzaSyAvOBVl-ywovqxMMDZMMysNJHMUSECWAcU"
+      allowfullscreen
+      class="center-block"></iframe>
+    {% endif %}
   </div>
 
 

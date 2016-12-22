@@ -1,15 +1,31 @@
+import urllib
+
 from django.db import models
 from django.core.validators import RegexValidator
 from django.utils.text import slugify
+
+from image_cropping import ImageRatioField
 
 
 class Church(models.Model):
     class Meta:
         verbose_name_plural = "Churches"
+        ordering = ['name']
     name = models.CharField(max_length=64)
+    CLASSIFICATION_CHOICES = (
+        ('T', 'Town'),
+        ('V', 'Village'),
+    )
+    classification = models.CharField(
+        max_length=1,
+        choices=CLASSIFICATION_CHOICES,
+        default='T'
+    )
     short_description = models.CharField(max_length=128)
     long_description = models.TextField()
     photo = models.ImageField(blank=True)
+    wide_crop = ImageRatioField('photo', '768x180')
+    list_crop = ImageRatioField('photo', '400x300')
     address_line_1 = models.CharField(max_length=64)
     address_line_2 = models.CharField(max_length=64)
     postcode_regex = RegexValidator(
@@ -24,10 +40,12 @@ class Church(models.Model):
     phone_number = models.CharField(blank=True, max_length=20)
     website = models.URLField(blank=True)
     slug = models.SlugField(editable=False, unique=True)
+    maps_query = models.CharField(max_length=256, editable=False, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
+        self.maps_query = urllib.parse.quote(" ".join([self.name, self.address_line_1, self.address_line_2, self.postcode, "United Kingdom"]))
         super(Church, self).save(*args, **kwargs)
 
     def __str__(self):

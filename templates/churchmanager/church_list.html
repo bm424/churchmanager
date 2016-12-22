@@ -1,16 +1,31 @@
 {% extends 'churchmanager/base.html' %}
 
 {% load staticfiles %}
+{% load cropping %}
+
+{% load churchmanager_extras %}
 
 {% block content %}
 
 <div class="church-photo">
-  <img src="{% static 'img/bridlington-nave.JPG' %}" class="img-responsive detail" />
+  <img src="{% static 'img/bridlington north beach.jpg' %}" class="img-responsive detail" />
 </div>
 
 <div class="container">
   <h2>Churches</h2>
+
   <hr />
+
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="{% town_or_village 'town-list' %}">
+      <a href="{% url 'town-list' %}">Town Churches</a>
+    </li>
+    <li role="presentation" class="{% town_or_village 'village-list' %}">
+      <a href="{%url 'village-list' %}">Village Churches</a>
+    </li>
+  </ul>
+
+  <br />
 
   {% for church_group in church_groups %}
 
@@ -21,7 +36,7 @@
           <a class="thumbnail" href="{% url 'church-detail' church.slug %}">
             {% if church.photo %}
               <div class="church-photo img-rounded">
-                <img src="{{ church.photo.url }}" class="img-responsive" alt="Photo of {{ church.name }}" />
+                <img src="{% cropped_thumbnail church 'list_crop' %}" class="img-responsive" alt="Photo of {{ church.name }}" />
               </div>
             {% endif %}
             <div class="caption">
