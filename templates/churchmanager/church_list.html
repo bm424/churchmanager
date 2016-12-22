@@ -36,7 +36,7 @@
           <a class="thumbnail" href="{% url 'church-detail' church.slug %}">
             {% if church.photo %}
               <div class="church-photo img-rounded">
-                <img src="{% cropped_thumbnail church "list_crop" %}" class="img-responsive" alt="Photo of {{ church.name }}" />
+                <img src="{% cropped_thumbnail church 'list_crop' %}" class="img-responsive" alt="Photo of {{ church.name }}" />
               </div>
             {% endif %}
             <div class="caption">
