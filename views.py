@@ -21,3 +21,11 @@ class ChurchList(ListView):
         context = super(ListView, self).get_context_data(*args, **kwargs)
         context['church_groups'] = grouped(context['church_list'], 3)
         return context
+
+class TownChurchList(ChurchList):
+
+    queryset = Church.objects.filter(classification="T")
+
+class VillageChurchList(ChurchList):
+
+    queryset = Church.objects.filter(classification="V")

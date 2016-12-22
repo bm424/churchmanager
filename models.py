@@ -9,6 +9,15 @@ class Church(models.Model):
     class Meta:
         verbose_name_plural = "Churches"
     name = models.CharField(max_length=64)
+    CLASSIFICATION_CHOICES = (
+        ('T', 'Town'),
+        ('V', 'Village'),
+    )
+    classification = models.CharField(
+        max_length=1,
+        choices=CLASSIFICATION_CHOICES,
+        default='T'
+    )
     short_description = models.CharField(max_length=128)
     long_description = models.TextField()
     photo = models.ImageField(blank=True)
