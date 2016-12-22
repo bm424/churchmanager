@@ -2,6 +2,8 @@ from django.db import models
 from django.core.validators import RegexValidator
 from django.utils.text import slugify
 
+from image_cropping import ImageRatioField
+
 
 class Church(models.Model):
     class Meta:
@@ -10,6 +12,8 @@ class Church(models.Model):
     short_description = models.CharField(max_length=128)
     long_description = models.TextField()
     photo = models.ImageField(blank=True)
+    wide_crop = ImageRatioField('photo', '768x180')
+    list_crop = ImageRatioField('photo', '280x180')
     address_line_1 = models.CharField(max_length=64)
     address_line_2 = models.CharField(max_length=64)
     postcode_regex = RegexValidator(
