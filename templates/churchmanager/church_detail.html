@@ -1,10 +1,12 @@
 {% extends 'churchmanager/base.html' %}
 
+{% load cropping %}
+
 {% block content %}
 
   {% if church.photo %}
     <div class="church-photo">
-      <img src="{{ church.photo.url }}" class="img-responsive detail" />
+      <img src="{% cropped_thumbnail church "wide_crop" %}" class="img-responsive detail" />
     </div>
   {% endif %}
 
