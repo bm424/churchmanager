@@ -22,7 +22,7 @@ class Church(models.Model):
     long_description = models.TextField()
     photo = models.ImageField(blank=True)
     wide_crop = ImageRatioField('photo', '768x180')
-    list_crop = ImageRatioField('photo', '280x180')
+    list_crop = ImageRatioField('photo', '400x300')
     address_line_1 = models.CharField(max_length=64)
     address_line_2 = models.CharField(max_length=64)
     postcode_regex = RegexValidator(
