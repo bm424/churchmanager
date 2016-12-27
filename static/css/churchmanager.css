@@ -1,15 +1,3 @@
-@media(max-width:767px) {
-  .church-photo {
-    max-height: 180px;
-  }
-}
-
-@media(min-width:768px) {
-  .church-photo {
-    max-height: 240px;
-  }
-}
-
 @media(min-width:992px) {
   .container {
     width : 950px;
@@ -28,6 +16,7 @@ body {
 
 .church-photo {
   overflow: hidden;
+  max-height: 200px;
 }
 
 img.detail {
