@@ -1,6 +1,7 @@
 {% extends 'churchmanager/base.html' %}
 
 {% load cropping %}
+{% load easy_maps_tags %}
 
 {% block content %}
 
@@ -68,6 +69,13 @@
     <p>
       {{ church.long_description | safe | linebreaks }}
     </p>
+    <div class="center-block">
+      <p>
+        {% if church.map_query and church.show_map %}
+          {% easy_map church.map_query 400 300 15 using 'easy_maps/responsive_map.html' %}
+        {% endif %}
+      </p>
+    </div>
   </div>
 
 

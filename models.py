@@ -40,12 +40,14 @@ class Church(models.Model):
     phone_number = models.CharField(blank=True, max_length=20)
     website = models.URLField(blank=True)
     slug = models.SlugField(editable=False, unique=True)
-    maps_query = models.CharField(max_length=256, editable=False, blank=True)
+
+    show_map = models.BooleanField(default=True, help_text="Choose whether or not to display the location of the church as a Google map.")
+    map_query = models.CharField(max_length=200, blank=True, editable=False)
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
-        self.maps_query = urllib.parse.quote(" ".join([self.name, self.address_line_1, self.address_line_2, self.postcode, "United Kingdom"]))
+        self.map_query = ", ".join([self.address_line_1, self.address_line_2, self.postcode, "United Kingdom"])
         super(Church, self).save(*args, **kwargs)
 
     def __str__(self):
