@@ -6,9 +6,7 @@
 {% block content %}
 
   {% if church.photo %}
-    <div class="container-fluid">
-      <img src="{% cropped_thumbnail church "wide_crop" %}" class="img-responsive detail" />
-    </div>
+    <img src="{% cropped_thumbnail church "wide_crop" %}" class="img-responsive detail" />
   {% endif %}
 
   <div class="container">
