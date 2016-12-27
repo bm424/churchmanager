@@ -16,11 +16,16 @@ body {
 
 .church-photo {
   overflow: hidden;
-  max-height: 200px;
+  height: 200px;
+  text-align: center;
 }
 
 img.detail {
   width: 100%;
+}
+
+img.list {
+  height: 100%;
 }
 
 h2 {
