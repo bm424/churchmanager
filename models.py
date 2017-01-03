@@ -42,7 +42,7 @@ class Church(models.Model):
     slug = models.SlugField(editable=False, unique=True)
 
     show_map = models.BooleanField(default=True, help_text="Choose whether or not to display the location of the church as a Google map.")
-    map_query = models.CharField(max_length=200, blank=True, editable=False)
+    map_query = models.CharField(max_length=200, blank=True, editable=False, null=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
