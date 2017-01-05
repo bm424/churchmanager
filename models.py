@@ -52,3 +52,12 @@ class Church(models.Model):
 
     def __str__(self):
         return "{}, {}".format(self.name, self.address_line_2)
+
+
+class News(models.Model):
+
+    title = models.CharField(max_length=144)
+    detail = models.TextField()
+    photo = models.ImageField(blank=True)
+    square_crop = ImageRatioField('photo', '64x64', size_warning=True)
+    date = models.DateField(auto_now_add=True)
