@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView
 
-from .models import Church
+from .models import Church, News
 
 
 def grouped(l, n):
@@ -22,9 +22,21 @@ class ChurchList(ListView):
         context['church_groups'] = grouped(context['church_list'], 3)
         return context
 
+
+class NewsList(ListView):
+
+    queryset = News.objects.filter(publish=True)
+    context_object_name = "news"
+
+class NewsDetail(DetailView):
+    
+    queryset = News.objects.filter(publish=True)
+
+
 class TownChurchList(ChurchList):
 
     queryset = Church.objects.filter(classification="T")
+
 
 class VillageChurchList(ChurchList):
 

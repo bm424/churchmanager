@@ -45,3 +45,12 @@ td span.glyphicon {
   padding: 0.25em;
   vertical-align: top;;
 }
+
+.btn-primary {
+  background-color: #124559;
+  border-color: #0f3949;
+}
+
+p.caption {
+  color: grey;
+}

@@ -1,0 +1,96 @@
+{% extends 'churchmanager/base.html' %}
+
+{% load staticfiles %}
+{% load cropping %}
+
+{% block content %}
+
+<img src="{% static 'img/bridlington north beach.jpg' %}" class="img-responsive detail" />
+
+<div class="container">
+
+  <h2>Churches in and around Bridlington</h2>
+
+  <hr>
+
+  <p class="lead">
+    Welcome to the website for the churches of Bridlington and its surrounding villages in beautiful East Yorkshire!
+  </p>
+
+  <hr />
+
+  <h3>Latest News</h3>
+
+  {% with news_item=news.last %}
+    <div class="media">
+      <div class="media-left">
+        {% if news_item.photo %}
+          <a href="#">
+            <img class="media-object img-thumbnail" src="{% cropped_thumbnail news_item 'square_crop' %}" alt="...">
+          </a>
+        {% endif %}
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading"><a href="{% url 'news-detail' news_item.pk %}">{{ news_item.title }}</a> <small>{{ news_item.date | date }}</small></h4>
+        {% if new_item.blurb %}
+          <p>
+            {{ news_item.blurb }} <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
+          </p>
+        {% else %}
+          <p>
+            {{ news_item.text|linebreaks|truncatewords:20 }}
+              <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  {% endwith %}
+
+  <hr />
+
+  <div class="well">
+
+    <h3 style="margin-top:0">Churches</h3>
+
+    <p>
+      Please select either of the options below for information about churches in the town of Bridlington and the nearby villages.
+    </p>
+
+    <a class="btn btn-primary" href="{% url 'town-list' %}">Town Churches</a>
+    <a class="btn btn-primary" href="{% url 'village-list' %}">Village Churches</a>
+
+  </div>
+
+<hr />
+
+<h3>News</h3>
+
+{% for news_item in news|slice:"1:" %}
+  <div class="media">
+    {% if news_item.photo %}
+      <div class="media-left">
+        <img class="media-object" src="{% cropped_thumbnail news_item 'square_crop' %}" alt="...">
+      </div>
+    {% endif %}
+    <div class="media-body">
+      <h4 class="media-heading"><a href="{% url 'news-detail' news_item.pk %}">{{ news_item.title }}</a> <small>{{ news_item.date | date }}</small></h4>
+      {% if new_item.blurb %}
+        <p>
+          {{ news_item.blurb }} <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
+        </p>
+      {% else %}
+        <p>
+          {{ news_item.text|linebreaks|truncatewords:20 }}
+            <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
+        </p>
+      {% endif %}
+    </div>
+  </div>
+  <br />
+{% endfor %}
+
+</div>
+
+
+
+{% endblock %}

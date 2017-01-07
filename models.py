@@ -56,8 +56,19 @@ class Church(models.Model):
 
 class News(models.Model):
 
-    title = models.CharField(max_length=144)
-    detail = models.TextField()
+    class Meta:
+        verbose_name_plural = "News"
+        ordering = ("-date",)
+
+    title = models.CharField(max_length=64)
+    blurb = models.CharField(max_length=144, help_text="Tweet length (144 characters). Optional.", blank=True)
+    text = models.TextField()
     photo = models.ImageField(blank=True)
+    photo_description = models.CharField(max_length=256, blank=True, help_text="Optional description (useful for screen readers).")
+    photo_caption = models.TextField(blank=True)
     square_crop = ImageRatioField('photo', '64x64', size_warning=True)
+    publish = models.BooleanField(default=False, help_text="Select when the article is ready for publication.")
     date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return "{}: {}".format(str(self.date), str(self.title))

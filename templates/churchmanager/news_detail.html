@@ -1,0 +1,41 @@
+{% extends 'churchmanager/base.html' %}
+
+{% load staticfiles %}
+{% load cropping %}
+{% load md2 %}
+
+{% block content %}
+
+<img src="{% static 'img/bridlington north beach.jpg' %}" class="img-responsive detail" />
+
+<div class="container">
+
+  <h2>{{ news.title }}<br /><small>{{ news.date|date }}</small></h2>
+
+  <hr />
+
+  {% if news.photo %}
+
+  <img class="img-responsive img-rounded center-block" src="{{ news.photo.url }}" alt="{{ news.photo_description }}" title="{{ news.photo_description }}" />
+
+  {% if news.photo_caption %}
+
+  <br />
+
+  <p class="caption">
+    {{ news.photo_caption }}
+  </p>
+
+  {% endif %}
+
+  {% endif %}
+
+  <hr />
+
+  <p>
+    {{ news.text|markdown:"safe" }}
+  </p>
+
+</div>
+
+{% endblock %}

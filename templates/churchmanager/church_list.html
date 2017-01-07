@@ -14,17 +14,6 @@
 
   <hr />
 
-  <ul class="nav nav-tabs">
-    <li role="presentation" class="{% town_or_village 'town-list' %}">
-      <a href="{% url 'town-list' %}">Town Churches</a>
-    </li>
-    <li role="presentation" class="{% town_or_village 'village-list' %}">
-      <a href="{%url 'village-list' %}">Village Churches</a>
-    </li>
-  </ul>
-
-  <br />
-
   {% for church_group in church_groups %}
 
     <div class="row">
