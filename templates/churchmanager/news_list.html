@@ -23,13 +23,11 @@
 
   {% with news_item=news.last %}
     <div class="media">
-      <div class="media-left">
-        {% if news_item.photo %}
-          <a href="#">
-            <img class="media-object img-thumbnail" src="{% cropped_thumbnail news_item 'square_crop' %}" alt="...">
-          </a>
-        {% endif %}
-      </div>
+      {% if news_item.photo %}
+        <div class="media-left">
+          <img class="media-object" src="{% cropped_thumbnail news_item 'square_crop' %}" alt="...">
+        </div>
+      {% endif %}
       <div class="media-body">
         <h4 class="media-heading"><a href="{% url 'news-detail' news_item.pk %}">{{ news_item.title }}</a> <small>{{ news_item.date | date }}</small></h4>
         {% if new_item.blurb %}

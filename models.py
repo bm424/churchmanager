@@ -58,7 +58,7 @@ class News(models.Model):
 
     class Meta:
         verbose_name_plural = "News"
-        ordering = ("-date",)
+        ordering = ("-datetime",)
 
     title = models.CharField(max_length=64)
     blurb = models.CharField(max_length=144, help_text="Tweet length (144 characters). Optional.", blank=True)
@@ -69,6 +69,7 @@ class News(models.Model):
     square_crop = ImageRatioField('photo', '64x64', size_warning=True)
     publish = models.BooleanField(default=False, help_text="Select when the article is ready for publication.")
     date = models.DateField(auto_now_add=True)
+    datetime = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "{}: {}".format(str(self.date), str(self.title))
