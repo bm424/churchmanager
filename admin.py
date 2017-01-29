@@ -23,7 +23,7 @@ class ChurchAdmin(ImageCroppingMixin, admin.ModelAdmin):
         ),
         (
             "Address", {
-                'fields': ('address_line_1', 'address_line_2', 'postcode')
+                'fields': ('address_line_1', 'address_line_2', 'postcode', 'map_embed_link', 'show_map')
             },
         ),
         (

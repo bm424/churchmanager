@@ -69,8 +69,8 @@
     </p>
     <div class="center-block">
       <p>
-        {% if church.map_query and church.show_map %}
-          {% easy_map church.map_query 400 300 15 using 'easy_maps/responsive_map.html' %}
+        {% if church.map_url and church.show_map %}
+          <iframe src="{{ church.map_url }}" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
         {% endif %}
       </p>
     </div>

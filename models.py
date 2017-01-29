@@ -41,13 +41,14 @@ class Church(models.Model):
     website = models.URLField(blank=True)
     slug = models.SlugField(editable=False, unique=True)
 
+    map_embed_link = models.CharField(max_length=500, blank=True, default="")
     show_map = models.BooleanField(default=True, help_text="Choose whether or not to display the location of the church as a Google map.")
-    map_query = models.CharField(max_length=200, blank=True, editable=False, null=True)
+    map_url = models.URLField(blank=True, editable=False, default="")
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
-        self.map_query = ", ".join([self.address_line_1, self.address_line_2, self.postcode, "United Kingdom"])
+        self.map_url = self.map_embed_link[13:-85]
         super(Church, self).save(*args, **kwargs)
 
     def __str__(self):
