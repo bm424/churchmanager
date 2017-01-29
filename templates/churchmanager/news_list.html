@@ -37,7 +37,7 @@
           </p>
         {% else %}
           <p>
-            {{ news_item.text | truncatewords:20 | markdown:"safe" }}
+            {{ news_item.text | truncatewords:20 | markdown }}
               <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
           </p>
         {% endif %}
@@ -79,7 +79,7 @@
         </p>
       {% else %}
         <p>
-          {{ news_item.text | truncatewords:20 | markdown:"safe" }}
+          {{ news_item.text | truncatewords:20 | markdown }}
             <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
         </p>
       {% endif %}
