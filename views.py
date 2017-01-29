@@ -25,7 +25,7 @@ class ChurchList(ListView):
 
 class NewsList(ListView):
 
-    queryset = News.objects.filter(publish=True)
+    queryset = News.objects.filter(publish=True).order_by('-datetime')
     context_object_name = "news"
 
 class NewsDetail(DetailView):

@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load cropping %}
+{% load md2 %}
 
 {% block content %}
 
@@ -21,7 +22,7 @@
 
   <h3>Latest News</h3>
 
-  {% with news_item=news.last %}
+  {% with news_item=news.first %}
     <div class="media">
       {% if news_item.photo %}
         <div class="media-left">
