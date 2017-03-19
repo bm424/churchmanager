@@ -18,32 +18,38 @@
     Welcome to the website for the churches of Bridlington and its surrounding villages in beautiful East Yorkshire!
   </p>
 
-  <hr />
 
-  <h3>Latest News</h3>
+  {% if news %}
 
-  {% with news_item=news.first %}
-    <div class="media">
-      {% if news_item.photo %}
-        <div class="media-left">
-          <img class="media-object" src="{% cropped_thumbnail news_item 'square_crop' %}" alt="...">
+    <hr />
+
+    <h3>Latest News</h3>
+
+
+      {% with news_item=news.first %}
+        <div class="media">
+          {% if news_item.photo %}
+            <div class="media-left">
+              <img class="media-object" src="{% cropped_thumbnail news_item 'square_crop' %}" alt="...">
+            </div>
+          {% endif %}
+          <div class="media-body">
+            <h4 class="media-heading"><a href="{% url 'news-detail' news_item.pk %}">{{ news_item.title }}</a> <small>{{ news_item.date | date }}</small></h4>
+            {% if new_item.blurb %}
+              <p>
+                {{ news_item.blurb }} <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
+              </p>
+            {% else %}
+              <p>
+                {{ news_item.text | truncatewords:20 | markdown }}
+                  <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
+              </p>
+            {% endif %}
+          </div>
         </div>
-      {% endif %}
-      <div class="media-body">
-        <h4 class="media-heading"><a href="{% url 'news-detail' news_item.pk %}">{{ news_item.title }}</a> <small>{{ news_item.date | date }}</small></h4>
-        {% if new_item.blurb %}
-          <p>
-            {{ news_item.blurb }} <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
-          </p>
-        {% else %}
-          <p>
-            {{ news_item.text | truncatewords:20 | markdown }}
-              <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
-          </p>
-        {% endif %}
-      </div>
-    </div>
-  {% endwith %}
+      {% endwith %}
+
+  {% endif %}
 
   <hr />
 
@@ -64,29 +70,34 @@
 
 <h3>News</h3>
 
-{% for news_item in news|slice:"1:" %}
-  <div class="media">
-    {% if news_item.photo %}
-      <div class="media-left">
-        <img class="media-object" src="{% cropped_thumbnail news_item 'square_crop' %}" alt="...">
+    {% for news_item in news|slice:"1:" %}
+      <div class="media">
+        {% if news_item.photo %}
+          <div class="media-left">
+            <img class="media-object" src="{% cropped_thumbnail news_item 'square_crop' %}" alt="...">
+          </div>
+        {% endif %}
+        <div class="media-body">
+          <h4 class="media-heading"><a href="{% url 'news-detail' news_item.pk %}">{{ news_item.title }}</a> <small>{{ news_item.date | date }}</small></h4>
+          {% if new_item.blurb %}
+            <p>
+              {{ news_item.blurb }} <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
+            </p>
+          {% else %}
+            <p>
+              {{ news_item.text | truncatewords:20 | markdown }}
+                <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
+            </p>
+          {% endif %}
+        </div>
       </div>
-    {% endif %}
-    <div class="media-body">
-      <h4 class="media-heading"><a href="{% url 'news-detail' news_item.pk %}">{{ news_item.title }}</a> <small>{{ news_item.date | date }}</small></h4>
-      {% if new_item.blurb %}
-        <p>
-          {{ news_item.blurb }} <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
-        </p>
-      {% else %}
-        <p>
-          {{ news_item.text | truncatewords:20 | markdown }}
-            <a href="{% url 'news-detail' news_item.pk %}">Read more.</a>
-        </p>
-      {% endif %}
-    </div>
-  </div>
-  <br />
-{% endfor %}
+      <br />
+
+    {% empty %}
+
+        <p>There hasn't been any news recently.</p>
+
+    {% endfor %}
 
 </div>
 
